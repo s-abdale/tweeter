@@ -9,7 +9,7 @@
   justify-content: center;
 }
 
-.tweet-text {
+#tweetText {
   width: 100%;
   resize: none;
   border: none;
