@@ -1,5 +1,6 @@
 .new-tweet-section {
-  position: absolute; /* made section position absolute, in relation to parent element 'main' */
+  /* position: absolute;  */
+  /* made section position absolute, in relation to parent element 'main' */
   top: 0px;
   width: 90%;
 }
@@ -11,7 +12,7 @@
 
 #tweetText {
   width: 100%;
-  resize: none;
+  /* resize: none; */
   border: none;
   background-color: #f4f1ec;
   border-bottom: 2px solid black;
