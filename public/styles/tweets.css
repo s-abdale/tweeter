@@ -4,11 +4,6 @@ article {
   padding: 0.5em;
   background-color: #f4f1ec;
   border: medium solid black;
-  /* display: flex;
-  flex-direction: column;
-  z-index: 3;
-  align-items: center;
-  justify-content: flex-start; */
 }
 
 article:hover {
@@ -23,7 +18,6 @@ article:hover {
 .tweet-header {
   display: flex;
   justify-content: space-between;
-  /* align-items: flex-end; */
 }
 
 .tweet-footer {

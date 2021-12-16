@@ -1,6 +1,4 @@
 .new-tweet-section {
-  /* position: absolute;  */
-  /* made section position absolute, in relation to parent element 'main' */
   top: 0px;
   width: 90%;
 }
@@ -12,7 +10,6 @@
 
 #tweetText {
   width: 100%;
-  /* resize: none; */
   border: none;
   background-color: #f4f1ec;
   border-bottom: 2px solid black;
@@ -26,5 +23,10 @@
 .tweet-button {
   background-color: #4056A1;
   color: #FFFFFF;
+  border: none;
   padding: 0.15em;
+}
+
+.tweet-button:hover {
+  box-shadow: 2px 2px 0 1px lightsteelblue;
 }
