@@ -27,7 +27,7 @@ body {
 
 main {
   background-color: #f4f1ec;
-  position: relative;
+  /* position: relative; */
   display: flex;
   flex-direction: column;
   align-items: center;
