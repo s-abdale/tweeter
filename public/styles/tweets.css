@@ -1,9 +1,13 @@
-article {
-  /* position: absolute; */
+#tweets-container {
   width: 90%;
   padding: 0.5em;
+}
+article {
+  /* position: absolute; */
   background-color: #f4f1ec;
   border: medium solid black;
+  margin-bottom: 1.5em;
+  padding: 0.5em;
 }
 
 article:hover {
