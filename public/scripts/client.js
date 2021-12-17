@@ -97,7 +97,10 @@ $(document).ready(function () {
         })
       })
       .fail(err => {console.log(`ERROR: ${err.message}`)})
-      .always(()=> {console.log('Posting tweet object has been executed')})
+      .always(()=> {
+        $('#counter').text(140);
+        console.log('Posting tweet object has been executed, and counter reset');
+      })
     }
   })
   getTweets();
