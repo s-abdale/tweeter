@@ -18,10 +18,14 @@ This repository is the starter code for the project: Students will fork and clon
 - Node 5.10.x or above
 
 ## Screenshots
+Screenshot of tweet compose box with character counter:
 !["Screenshot of tweet compose box with character counter"](https://github.com/s-abdale/tweeter/blob/master/docs/desktop-char-count.png)
 
+Screenshot of error message:
 !["Screenshot of error message"](https://github.com/s-abdale/tweeter/blob/master/docs/desktop-error-msg.png)
 
+Mobile format:
 !["Screenshot of mobile format"](https://github.com/s-abdale/tweeter/blob/master/docs/mobile-view.png)
 
+Tablet format:
 !["Screenshot of tablet format"](https://github.com/s-abdale/tweeter/blob/master/docs/tablet-view.png)
