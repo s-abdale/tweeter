@@ -19,7 +19,7 @@ $(document).ready(function() {
         </section>
         <br>
         <div class="posted-tweet">
-          <p class="tweeted-text">${tweetObject.content.text}</p>
+          <p class="tweeted-text">${escape(tweetObject.content.text)}</p>
         </div>
         <footer class="tweet-footer">
           <div class="tweet-days-ago">
@@ -69,7 +69,7 @@ $(document).ready(function() {
     // Post request - new tweets
     const inputBox = $(this).children('#tweetText');
     const tweetText = inputBox.val();
-    console.log(tweetText);
+    console.log(`Tweet: ${tweetText}`);
 
     if (tweetText.length > 140) {
       alert('Reduce length of tweet');
