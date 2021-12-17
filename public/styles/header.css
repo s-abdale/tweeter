@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: -webkit-fill-available;
   padding-top: 90px;
   background-color: #f4f1ec;
   background-image: url("/images/smalldotsgrid.png");
@@ -13,4 +12,5 @@
 
 .name {
   height: 3.5em;
+  border-bottom: solid thick yellow;
 }

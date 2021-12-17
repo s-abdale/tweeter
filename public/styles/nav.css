@@ -1,5 +1,4 @@
 nav {
-  height: 75px;
   width: -webkit-fill-available;
   background-color: #4056A1;
   color: #FFFFFF;
@@ -14,7 +13,6 @@ nav {
 
 .headerLogo {
   font-family: 'Bungee', cursive, sans-serif;
-  font-size: 40px;
 }
 
 .headerWrite {

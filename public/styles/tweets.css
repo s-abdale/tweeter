@@ -1,13 +1,12 @@
-#tweets-container {
+/* #tweets-container {
   width: 90%;
   padding: 0.5em;
-}
+} */
 article {
   /* position: absolute; */
   background-color: #f4f1ec;
   border: medium solid black;
   margin-bottom: 1.5em;
-  padding: 0.5em;
 }
 
 article:hover {
@@ -17,7 +16,6 @@ article:hover {
 
 .tweeted-text {
   border-bottom: medium solid black;
-  font-size: 20px;
 }
 
 article:hover .tweeted-text{
@@ -38,7 +36,6 @@ article:hover .tweeted-text{
 .tweet-footer {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
 }
 
 .tweet-icons {
