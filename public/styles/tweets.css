@@ -18,6 +18,10 @@ article:hover {
   border-bottom: medium solid black;
 }
 
+.posted-tweet {
+  word-wrap: break-word;
+}
+
 article:hover .tweeted-text{
   border-bottom: medium solid #4056A1;
 }
