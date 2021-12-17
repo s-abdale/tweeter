@@ -18,6 +18,9 @@ This repository is the starter code for the project: Students will fork and clon
 - Node 5.10.x or above
 
 ## Screenshots
+Demo video:
+!["Gif of app functionality"](https://github.com/s-abdale/tweeter/blob/master/docs/tweeter-demo-vid.gif)
+
 Screenshot of tweet compose box with character counter:
 !["Screenshot of tweet compose box with character counter"](https://github.com/s-abdale/tweeter/blob/master/docs/desktop-char-count.png)
 
