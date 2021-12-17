@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-between;
 }
-.tweet-button {
+#tweet-button {
   background-color: #4056A1;
   color: #FFFFFF;
   border: none;
