@@ -5,8 +5,8 @@
 **/
 
 
-$(document).ready(function () {
-  const createTweetElement = function (tweetObject) {
+$(document).ready(function() {
+  const createTweetElement = function(tweetObject) {
     const timePosted = timeago.format(tweetObject.created_at);
     const markup = `
       <article>
@@ -32,59 +32,54 @@ $(document).ready(function () {
           </div>
         </footer>
       </article>
-      `
-    return markup
-  }
+      `;
+    return markup;
+  };
 
-  // loop through the results
-  const renderMarkup = function (tweetArr) {
+  const renderMarkup = function(tweetArr) {
     for (let tweetObject of tweetArr) {
-      // create and attach HTML element to the dom
+      // Create HTML element
       const markup = createTweetElement(tweetObject);
-      // Targetting the container and appending the item to it
-      $('#tweets-container').prepend(markup); //try PREPEND 🚨
-      // return $('#tweets-container')
+      // Append item to container, newest to oldest
+      $('#tweets-container').prepend(markup);
     }
-  }
+  };
 
-  // perform request and deal with result
-  const getTweets = function (/*woudl otherwise be URL value frm inputbox - i.e. tweetText*/) {
-    // extract text input
-    // const tweetText = inputBox.val(); // NOT IN USE YET - use this to retrieve specific data from /tweets/, probably newest object in array
-
-
-    // send the request to /tweets
+  const getTweets = function() {
+    // Get request - old tweets
     $.ajax({
-      // url: `/tweets/${tweetText}`,
       url: `/tweets/`,
       method: 'GET'
     })
-    .done(tweetArr => {
-      renderMarkup(tweetArr)
-    })
-    .fail(err => {console.log(`ERROR: ${err.message}`)})
-    .always(()=> {console.log('Request to tweet object has been executed')})
-  }
+      .done(tweetArr => {
+        renderMarkup(tweetArr);
+      })
+      .fail(err => {
+        console.log(`ERROR: ${err.message}`);
+      })
+      .always(()=> {
+        console.log('Request to tweet object has been executed');
+      });
+  };
 
-  // catch the form submit
-  $('.new-tweet-form').on('submit', function(event){
+  $('.new-tweet-form').on('submit', function(event) {
     event.preventDefault();
-    // const inputBox = $(this).children('#tweetText'); // use later w/tweetText
     console.log('Submit is being triggered');
 
-
-    // set up POST req here
+    // Post request - new tweets
     const inputBox = $(this).children('#tweetText');
     const tweetText = inputBox.val();
-    console.log(tweetText)
+    console.log(tweetText);
 
     if (tweetText.length > 140) {
+      alert('Reduce length of tweet');
       console.log('REDUCE LENGTH OF TWEET');
+    } else if (tweetText.length === 0) {
+      alert('Enter text to post a tweet');
+      console.log('CANNOT CREATE EMPTY TWEET');    
     } else {
-      
       // post to /tweets
       $.ajax({
-        // url: `/tweets/${tweetText}`,
         url: `/tweets/`,
         method: 'POST',
         data: $(this).serialize()
@@ -94,14 +89,16 @@ $(document).ready(function () {
           const latestTweet = data.slice(-1).pop();
           const latestTweetObj = createTweetElement(latestTweet);
           $('#tweets-container').prepend(latestTweetObj);
-        })
+        });
       })
-      .fail(err => {console.log(`ERROR: ${err.message}`)})
+      .fail(err => {
+        console.log(`ERROR: ${err.message}`);
+      })
       .always(()=> {
-        $('#counter').text(140);
+        $('#counter').val(140);
         console.log('Posting tweet object has been executed, and counter reset');
-      })
+      });
     }
-  })
+  });
   getTweets();
-})
+});
