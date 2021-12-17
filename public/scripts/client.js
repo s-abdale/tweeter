@@ -2,24 +2,24 @@
  * Client-side JS logic goes here
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
+**/
 
 
 $(document).ready(function () {
-  const createShowElement = function (showObject) {
-    const timePosted = timeago.format(showObject.created_at);
+  const createTweetElement = function (tweetObject) {
+    const timePosted = timeago.format(tweetObject.created_at);
     const markup = `
       <article>
         <section class="tweet-header">
           <div class="tweet-avatar">
-            <img src="${showObject.user.avatars}">
-            <span>&nbsp&nbsp${showObject.user.name}</span>
+            <img src="${tweetObject.user.avatars}">
+            <span>&nbsp&nbsp${tweetObject.user.name}</span>
           </div>
-          <span class="tweet-handle">${showObject.user.handle}</span>
+          <span class="tweet-handle">${tweetObject.user.handle}</span>
         </section>
         <br>
         <div class="posted-tweet">
-          <p class="tweeted-text">${showObject.content.text}</p>
+          <p class="tweeted-text">${tweetObject.content.text}</p>
         </div>
         <footer class="tweet-footer">
           <div class="tweet-days-ago">
@@ -37,12 +37,13 @@ $(document).ready(function () {
   }
 
   // loop through the results
-  const renderMarkup = function (showArr) {
-    for (let showObject of showArr) {
+  const renderMarkup = function (tweetArr) {
+    for (let tweetObject of tweetArr) {
       // create and attach HTML element to the dom
-      const markup = createShowElement(showObject);
+      const markup = createTweetElement(tweetObject);
       // Targetting the container and appending the item to it
-      $('#tweets-container').append(markup);
+      $('#tweets-container').prepend(markup); //try PREPEND 🚨
+      // return $('#tweets-container')
     }
   }
 
@@ -58,9 +59,8 @@ $(document).ready(function () {
       url: `/tweets/`,
       method: 'GET'
     })
-    .done(results => {
-      // console.log(results); // object of objects
-      renderMarkup(results)
+    .done(tweetArr => {
+      renderMarkup(tweetArr)
     })
     .fail(err => {console.log(`ERROR: ${err.message}`)})
     .always(()=> {console.log('Request to tweet object has been executed')})
@@ -69,30 +69,36 @@ $(document).ready(function () {
   // catch the form submit
   $('.new-tweet-form').on('submit', function(event){
     event.preventDefault();
+    // const inputBox = $(this).children('#tweetText'); // use later w/tweetText
+    console.log('Submit is being triggered');
+
+
+    // set up POST req here
     const inputBox = $(this).children('#tweetText');
-    console.log('Submit is being triggered')
+    const tweetText = inputBox.val();
+    console.log(tweetText)
 
-    getTweets();
+    if (tweetText.length > 140) {
+      console.log('REDUCE LENGTH OF TWEET');
+    } else {
+      
+      // post to /tweets
+      $.ajax({
+        // url: `/tweets/${tweetText}`,
+        url: `/tweets/`,
+        method: 'POST',
+        data: $(this).serialize()
+      }).then(function() {
+        $('#tweetText').val("");
+        $.get('/tweets/', (data) => {
+          const latestTweet = data.slice(-1).pop();
+          const latestTweetObj = createTweetElement(latestTweet);
+          $('#tweets-container').prepend(latestTweetObj);
+        })
+      })
+      .fail(err => {console.log(`ERROR: ${err.message}`)})
+      .always(()=> {console.log('Posting tweet object has been executed')})
+    }
   })
-
-
-
-  // Test / driver code (temporary). Eventually will get this from the server.
-  // const tweetData = {
-  //   "user": {
-  //     "name": "Newton",
-  //     "avatars": "https://i.imgur.com/73hZDYK.png",
-  //       "handle": "@SirIsaac"
-  //     },
-  //   "content": {
-  //       "text": "If I have seen further it is by standing on the shoulders of giants"
-  //     },
-  //   "created_at": 1461116232227
-  // }
-
-  // const $tweet = createTweetElement(tweetData);
-
-  // Test / driver code (temporary)
-  // console.log($tweet); // to see what it looks like
-  // $('#tweets-container').append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
+  getTweets();
 })
