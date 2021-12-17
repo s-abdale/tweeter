@@ -19,7 +19,7 @@ $(document).ready(function() {
         </section>
         <br>
         <div class="posted-tweet">
-          <p class="tweeted-text">${escape(tweetObject.content.text)}</p>
+        ${$(`<p class="tweeted-text">`).text(tweetObject.content.text).html()}
         </div>
         <footer class="tweet-footer">
           <div class="tweet-days-ago">
@@ -62,6 +62,19 @@ $(document).ready(function() {
       });
   };
 
+  const errorBanner = function(err) {
+    if (!$('.invalid-tweet').hasClass("toggled-invalid-tweet")) {
+      $('.invalid-tweet').addClass('toggled-invalid-tweet');
+    }
+    $('.invalid-tweet')
+      .text(`Error: ${err}`)
+      .slideDown(250, function() {
+        setTimeout(function() {
+          $('.toggled-invalid-tweet').slideUp(250);
+        }, 3500);
+      });
+  };
+
   $('.new-tweet-form').on('submit', function(event) {
     event.preventDefault();
     console.log('Submit is being triggered');
@@ -72,11 +85,13 @@ $(document).ready(function() {
     console.log(`Tweet: ${tweetText}`);
 
     if (tweetText.length > 140) {
-      alert('Reduce length of tweet');
-      console.log('REDUCE LENGTH OF TWEET');
+      console.log('REDUCE LENGTH OF YOUR TWEET');
+      let err = `Reduce the length of your tweet`;
+      return errorBanner(err);
     } else if (tweetText.length === 0) {
-      alert('Enter text to post a tweet');
-      console.log('CANNOT CREATE EMPTY TWEET');    
+      console.log('CANNOT POST AN EMPTY TWEET');
+      let err = `Cannot post an empty tweet`;
+      return errorBanner(err);
     } else {
       // post to /tweets
       $.ajax({
@@ -91,13 +106,13 @@ $(document).ready(function() {
           $('#tweets-container').prepend(latestTweetObj);
         });
       })
-      .fail(err => {
-        console.log(`ERROR: ${err.message}`);
-      })
-      .always(()=> {
-        $('#counter').val(140);
-        console.log('Posting tweet object has been executed, and counter reset');
-      });
+        .fail(err => {
+          console.log(`ERROR: ${err.message}`);
+        })
+        .always(()=> {
+          $('#counter').val(140);
+          console.log('Posting tweet object has been executed, and counter reset');
+        });
     }
   });
   getTweets();

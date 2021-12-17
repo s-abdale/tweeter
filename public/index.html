@@ -44,7 +44,7 @@
         <img src="/images/profile-hex.png">
       </div>
       <div class="name">
-        <h2>Your Name</h2>
+        <h2>Violet Beauregarde</h2>
       </div>
     </header>
 
@@ -52,7 +52,9 @@
     <main>
       <!-- New tweets -->
       <section class="new-tweet-section">
-        <h2 class="compose-tweet">Compose Tweet</h2>
+        <div>
+          <h3 class="invalid-tweet"></h3>
+        </div>
         <form action= "/tweets" method="POST" class="new-tweet-form">
           <label for="tweet-text">What are you humming about?</label>
           <textarea name="text" id="tweetText"></textarea>
@@ -62,9 +64,8 @@
           </div>
         </form>
       </section>
-
       <br>
-
+      <!-- Old tweets -->
       <div id="tweets-container"></div>
     </main>
   </body>
